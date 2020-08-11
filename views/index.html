@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Products</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Titillium+Web:200,400,700"
+      rel="stylesheet"
+    />
+    <link href="style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="app">
+      {{ cart }}
+      <nav>
+        <ul>
+          <li><a href="/" title="Products">Products</a></li>
+          <li><a href="/cart" title="Cart">Cart</a></li>
+        </ul>
+      </nav>
+      <header>
+        <h1>Products</h1>
+      </header>
+      <div class="container">
+        <section v-for="product in products" class="product">
+          <!-- <img src="/images/123.jpg" alt="Smartphone" /> -->
+          <img :src="product.image" :alt="product.name" />
+          <h2>{{ product.name }}</h2>
+          <p>{{ product.description }}</p>
+          <aside>
+            <ul>
+              <li>Price: {{ product.price + ' ' + product.currency}}</li>
+              <li>In Stock: {{ product.stockCount }} items</li>
+            </ul>
+            <p>Stock count: {{product.stockCount}}</p>
+            <p>
+              In Cart: {{cart[product.id] ? cart[product.id].quantity : 0}}
+            </p>
+            <button v-on:click="addToCart(product)">Add to Cart</button>
+          </aside>
+        </section>
+        <!-- use public/products.js to populate the html -->
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vuex"></script>
+    <script src="products.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
