@@ -43,7 +43,7 @@ var app = new Vue({
       if (this.cart[product.id].quantity > 1) {
         this.cart[product.id].quantity--;
       } else {
-        delete this.cart[product.id];
+        Vue.delete(this.cart, product.id);
       }
       //------>remove product from the cart
       localStorage.setItem("cart", JSON.stringify(this.cart));
