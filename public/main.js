@@ -15,16 +15,14 @@ var app = new Vue({
   methods: {
     addToCart(product) {
       if (product.id in this.cart) {
-        if (
-          this.cart[product.id].stockCount > this.cart[product.id].quantity &&
-          this.cart[product.id].stockCount !== 0
-        ) {
-          this.cart[product.id].quantity++;
+        let item = this.cart[product.id];
+        if (item.stockCount > item.quantity && item.stockCount !== 0) {
+          item.quantity++;
         }
       } else {
         if (product.stockCount > 0) {
-          product.quantity = 1;
           Vue.set(app.cart, product.id, product);
+          Vue.set(app.cart[product.id], "quantity", 1);
         }
       }
       // let item = this.cart[product.id];
@@ -44,6 +42,8 @@ var app = new Vue({
     removeQuantity(product) {
       if (this.cart[product.id].quantity > 1) {
         this.cart[product.id].quantity--;
+      } else {
+        delete this.cart[product.id];
       }
       //------>remove product from the cart
       localStorage.setItem("cart", JSON.stringify(this.cart));
