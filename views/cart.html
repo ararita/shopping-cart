@@ -24,7 +24,7 @@
           <h1>Cart</h1>
         </header>
         <div class="container">
-          <section v-for="product in products" class="cart">
+          <section v-for="(product, productId) in cart" class="cart">
             <h2>{{ product.name }}</h2>
             <p>Price: {{ product.price + ' ' + product.currency}}</p>
             <p>In Stock: {{ product.stockCount }} items</p>
@@ -33,7 +33,7 @@
             <p>
               In Cart: {{cart[product.id] ? cart[product.id].quantity : 0}}
             </p>
-            <button v-on:click="removeQantity(product)">-</button>
+            <button v-on:click="removeQuantity(product)">-</button>
           </section>
           <!-- use public/products.js to populate the html -->
         </div>
