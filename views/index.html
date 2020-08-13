@@ -33,9 +33,10 @@
               <li>Price: {{ product.price + ' ' + product.currency}}</li>
               <li>In Stock: {{ product.stockCount }} items</li>
             </ul>
-            <p>Stock count: {{product.stockCount}}</p>
+            <!-- <p>Stock count: {{product.stockCount}}</p> -->
             <p>
-              In Cart: {{cart[product.id] ? cart[product.id].quantity : 0}}
+              In Cart: {{cart.items[product.id] ?
+              cart.items[product.id].quantity : 0}}
             </p>
             <button v-on:click="addToCart(product)">Add to Cart</button>
           </aside>

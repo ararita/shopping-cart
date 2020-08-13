@@ -2,7 +2,11 @@ var app = new Vue({
   el: "#app",
   data: {
     products: products,
-    cart: {},
+    cart: {
+      totalPrice: 0,
+      totalQuantity: 0,
+      items: {},
+    },
   },
   mounted() {
     var storedCart = localStorage.getItem("cart");
@@ -14,38 +18,30 @@ var app = new Vue({
   },
   methods: {
     addToCart(product) {
-      if (product.id in this.cart) {
-        let item = this.cart[product.id];
+      if (product.id in this.cart.items) {
+        let item = this.cart.items[product.id];
         if (item.stockCount > item.quantity && item.stockCount !== 0) {
           item.quantity++;
         }
       } else {
         if (product.stockCount > 0) {
-          Vue.set(app.cart, product.id, product);
-          Vue.set(app.cart[product.id], "quantity", 1);
+          Vue.set(app.cart.items, product.id, product);
+          Vue.set(app.cart.items[product.id], "quantity", 1);
         }
       }
-      // let item = this.cart[product.id];
-      // if (!item) {
-      //   //Vue.set(vm.items, indexOfItem, newValue)
-      //   Vue.set(app.cart, product.id, product);
-      // }
-      // if (item.stockCount > item.quantity && item.stockCount !== 0) {
-      //   item.quantity++;
-      // } else {
-      //   console.log("item is out of stock");
-      // }
-      //------>tell user item is out of stock
-
       localStorage.setItem("cart", JSON.stringify(this.cart));
     },
+    // sumItemsInCart(product) {
+    //   let sum = 0;
+    //   for (const productId in this.cart) {
+    //   }
+    // },
     removeQuantity(product) {
-      if (this.cart[product.id].quantity > 1) {
-        this.cart[product.id].quantity--;
+      if (this.cart.items[product.id].quantity > 1) {
+        this.cart.items[product.id].quantity--;
       } else {
-        Vue.delete(this.cart, product.id);
+        Vue.delete(this.cart.items, product.id);
       }
-      //------>remove product from the cart
       localStorage.setItem("cart", JSON.stringify(this.cart));
     },
   },
