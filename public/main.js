@@ -20,7 +20,7 @@ var app = new Vue({
     addToCart(product) {
       if (product.id in this.cart.items) {
         let item = this.cart.items[product.id];
-        if (item.stockCount > item.quantity && item.stockCount !== 0) {
+        if (item.stockCount > item.quantity) {
           item.quantity++;
         }
       } else {
@@ -29,19 +29,17 @@ var app = new Vue({
           Vue.set(app.cart.items[product.id], "quantity", 1);
         }
       }
+      this.cart.totalQuantity++;
+
       localStorage.setItem("cart", JSON.stringify(this.cart));
     },
-    // sumItemsInCart(product) {
-    //   let sum = 0;
-    //   for (const productId in this.cart) {
-    //   }
-    // },
     removeQuantity(product) {
       if (this.cart.items[product.id].quantity > 1) {
         this.cart.items[product.id].quantity--;
       } else {
         Vue.delete(this.cart.items, product.id);
       }
+      this.cart.totalQuantity--;
       localStorage.setItem("cart", JSON.stringify(this.cart));
     },
   },
