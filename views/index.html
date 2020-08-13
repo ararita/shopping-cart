@@ -40,7 +40,15 @@
               In Cart: {{cart.items[product.id] ?
               cart.items[product.id].quantity : 0}}
             </p>
-            <button v-on:click="addToCart(product)">Add to Cart</button>
+            <button
+              v-if="product.stockCount > 0"
+              v-on:click="addToCart(product)"
+            >
+              Add to Cart
+            </button>
+            <p v-else>
+              Out of Stock
+            </p>
           </aside>
         </section>
         <!-- use public/products.js to populate the html -->

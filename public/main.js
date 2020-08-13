@@ -18,29 +18,40 @@ var app = new Vue({
   },
   methods: {
     addToCart(product) {
+      // if (product.stockCount <= 0) {
+      //   return;
+      // }
       if (product.id in this.cart.items) {
         let item = this.cart.items[product.id];
-        if (item.stockCount > item.quantity) {
+        if (item.stockCount > 0) {
           item.quantity++;
+          this.cart.totalQuantity++;
+          this.cart.items[product.id].stockCount--;
         }
       } else {
-        if (product.stockCount > 0) {
-          Vue.set(app.cart.items, product.id, product);
-          Vue.set(app.cart.items[product.id], "quantity", 1);
-        }
+        Vue.set(app.cart.items, product.id, product);
+        Vue.set(app.cart.items[product.id], "quantity", 1);
+        this.cart.totalQuantity++;
+        this.cart.items[product.id].stockCount--;
       }
-      this.cart.totalQuantity++;
+
+      // this.cart.items[product.id].stockCount--;
 
       localStorage.setItem("cart", JSON.stringify(this.cart));
     },
+    calculateTotalPrice(product) {},
     removeQuantity(product) {
       let item = this.cart.items[product.id];
       if (item.quantity > 1) {
         item.quantity--;
+        this.cart.totalQuantity--;
+        item.stockCount++;
       } else {
         Vue.delete(this.cart.items, product.id);
+        this.cart.totalQuantity--;
+        item.stockCount++;
       }
-      this.cart.totalQuantity--;
+      // item.stockCount++;
       localStorage.setItem("cart", JSON.stringify(this.cart));
     },
   },

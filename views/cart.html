@@ -30,14 +30,15 @@
             <h2>{{ product.name }}</h2>
             <p>Price: {{ product.price + ' ' + product.currency}}</p>
             <p>In Stock: {{ product.stockCount }} items</p>
-
-            <p>Stock count: {{product.stockCount}}</p>
             <p>
               In Cart: {{cart.items[product.id] ?
               cart.items[product.id].quantity : 0}}
             </p>
+            <p>Total price: {{product.totalPrice}}</p>
+            <button v-on:click="addToCart(product)">+</button>
             <button v-on:click="removeQuantity(product)">-</button>
           </section>
+
           <!-- use public/products.js to populate the html -->
         </div>
       </div>
