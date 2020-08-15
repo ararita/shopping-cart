@@ -34,12 +34,12 @@
               In Cart: {{cart.items[product.id] ?
               cart.items[product.id].quantity : 0}}
             </p>
-            <p>Total price: {{product.totalPrice}}</p>
+            <p>Price: {{ calculateProductGroupPrice }}</p>
             <button v-on:click="addToCart(product)">+</button>
             <button v-on:click="removeQuantity(product)">-</button>
           </section>
-          <p>Total price: {{calculateTotalPrice}}</p>
-          <p>Total price: {{calculateTotalPrice2}}</p>
+          <p>Total price: {{ calculateTotalPrice }}</p>
+          <!-- <p>Total price: {{calculateTotalPrice2}}</p> -->
 
           <!-- use public/products.js to populate the html -->
         </div>
