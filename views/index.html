@@ -12,7 +12,7 @@
   </head>
   <body>
     <div id="app">
-      {{ cart }}
+      <!-- {{ cart }} -->
       <nav>
         <ul>
           <li><a href="/" title="Products">Products</a></li>
@@ -26,29 +26,44 @@
       </header>
       <div class="container">
         <section v-for="product in products" class="product">
-          <img :src="product.image" :alt="product.name" />
-          <h2>{{ product.name }}</h2>
-          <p>{{ product.description }}</p>
-          <aside>
-            <ul>
-              <li>Price: {{ product.price + ' ' + product.currency}}</li>
-              <!-- <li>In Stock: {{ product.stockCount }} items</li> -->
-            </ul>
+          <!-- <div class="product-card"> -->
+          <figure class="image">
+            <img :src="product.image" :alt="product.name" />
+          </figure>
+          <div class="headline">
+            <h2>
+              {{ product.name }}
+            </h2>
+            <h2 style="color: #330099;">
+              {{ product.price + ' ' + product.currency}}
+            </h2>
+          </div>
+          <div class="description">
+            <p>{{ product.description }}</p>
+          </div>
 
-            <p>
+          <!-- <aside> -->
+          <!-- <ul>
+                  <li>Price: {{ product.price + ' ' + product.currency}}</li>
+                  <li>In Stock: {{ product.stockCount }} items</li>
+                </ul> -->
+
+          <!-- <p>
               In Cart: {{cart.items[product.id] ?
               cart.items[product.id].quantity : 0}}
-            </p>
-            <button
-              v-if="product.stockCount > 0"
-              v-on:click="addToCart(product)"
-            >
-              Add to Cart
-            </button>
-            <p v-else>
-              Out of Stock
-            </p>
-          </aside>
+            </p> -->
+          <!-- </aside> -->
+          <button
+            class="add-product-btn"
+            v-if="product.stockCount > 0"
+            v-on:click="addToCart(product)"
+          >
+            Add to Cart
+          </button>
+          <p style="color: #ce1f1f;" v-else>
+            Out of Stock
+          </p>
+          <!-- </div> -->
         </section>
         <!-- use public/products.js to populate the html -->
       </div>

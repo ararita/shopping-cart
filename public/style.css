@@ -1,4 +1,7 @@
 /* Basic styling for UI */
+* {
+  box-sizing: border-box;
+}
 
 body {
   font: 16px "Titillium Web", sans-serif;
@@ -8,10 +11,14 @@ body {
 img {
   width: 100%;
   display: block;
+  border-radius: 3px;
 }
 
 nav {
-  background: #330099;
+  background: #6233c0;
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 
 nav ul {
@@ -36,13 +43,13 @@ nav ul li a {
 }
 
 nav ul li a.active {
-  background: #24006B;
+  background: #6233c0;
 }
 
 nav ul li a:hover {
-  background: #AA80FF;
+  background: #aa80ff;
   color: #000;
-  font-weight: 700;
+  font-weight: 500;
 }
 
 header {
@@ -53,12 +60,74 @@ h1 {
   color: #777380;
   font-weight: 200;
   font-size: 35px;
+  padding-top: 50px;
 }
 
 h2 {
   font-size: 25px;
+  font-weight: 300;
+}
+
+figure {
+  margin: 0;
 }
 
 /* Application styles */
+.product {
+  /* height: 100%; */
+  box-shadow: 0px 5px 10px rgba(138, 136, 136, 0.74);
+  border-radius: 5px;
+  padding: 15px;
+}
 
+.container {
+  display: grid;
+  grid-gap: 32px;
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 22px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+/* 
+.product-card {
+  box-shadow: 0px 5px 10px rgba(138, 136, 136, 0.74);
+  border-radius: 5px;
+  padding: 15px;
 
+  height: 100%; 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+} */
+
+/* .image {
+  width: 100px;
+  margin-right: 10px;
+  flex: 0 0 100px;
+} */
+
+.headline {
+  display: flex;
+  justify-content: space-between;
+}
+
+.description {
+  max-height: 100%;
+}
+
+.add-product-btn {
+  width: 100%;
+  height: 43px;
+  border: none;
+  border-radius: 3px;
+  background: #373d3d;
+  font-size: 1.1em;
+  font-weight: 200;
+  color: white;
+  outline: none;
+}
+
+.add-product-btn:hover {
+  background: #373d3da8;
+  cursor: pointer;
+}
