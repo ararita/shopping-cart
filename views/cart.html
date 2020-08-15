@@ -34,7 +34,7 @@
               In Cart: {{cart.items[product.id] ?
               cart.items[product.id].quantity : 0}}
             </p>
-            <p>Price: {{ calculateProductGroupPrice }}</p>
+            <p>Quantity Price: {{ calculateProductGroupPrice(product) }}</p>
             <button v-on:click="addToCart(product)">+</button>
             <button v-on:click="removeQuantity(product)">-</button>
           </section>

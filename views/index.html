@@ -26,14 +26,13 @@
       </header>
       <div class="container">
         <section v-for="product in products" class="product">
-          <!-- <img src="/images/123.jpg" alt="Smartphone" /> -->
           <img :src="product.image" :alt="product.name" />
           <h2>{{ product.name }}</h2>
           <p>{{ product.description }}</p>
           <aside>
             <ul>
               <li>Price: {{ product.price + ' ' + product.currency}}</li>
-              <li>In Stock: {{ product.stockCount }} items</li>
+              <!-- <li>In Stock: {{ product.stockCount }} items</li> -->
             </ul>
 
             <p>

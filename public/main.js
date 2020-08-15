@@ -13,7 +13,6 @@ var app = new Vue({
     var storedProducts = localStorage.getItem("products");
 
     if (storedCart) {
-      //truthy if not false, undefined, "", 0
       console.log("Found a stored cart and loading it now");
       this.cart = JSON.parse(storedCart);
     }
@@ -39,19 +38,7 @@ var app = new Vue({
       localStorage.setItem("cart", JSON.stringify(this.cart));
       localStorage.setItem("products", JSON.stringify(this.products));
     },
-    calculateProductGroupPrice() {
-      let items = Object.values(this.cart.items);
-      let price = 0;
-      for (let i = 0; i < items.length; i++) {
-        let item = items[i];
-        price = item.price * item.quantity;
-        console.log("------price", price);
-      }
-      console.log("after loop price", price);
-      return price;
-      localStorage.setItem("cart", JSON.stringify(this.cart));
-      localStorage.setItem("products", JSON.stringify(this.products));
-    },
+
     // calculateTotalPrice2() {
     //   let items = Object.values(this.cart.items);
     //   // reduce((curr, acc) =>)
@@ -70,8 +57,8 @@ var app = new Vue({
         let item = this.cart.items[product.id];
         if (item.stockCount > 0) {
           item.quantity++;
-          this.products[product.id].stockCount--;
-          // item.stockCount--;
+          // this.products[product.id].stockCount--;
+          item.stockCount--;
           this.cart.totalQuantity++;
         }
       } else {
@@ -99,6 +86,12 @@ var app = new Vue({
         this.cart.totalQuantity--;
         item.stockCount++;
       }
+      localStorage.setItem("cart", JSON.stringify(this.cart));
+      localStorage.setItem("products", JSON.stringify(this.products));
+    },
+    calculateProductGroupPrice(product) {
+      return product.price * product.quantity;
+
       localStorage.setItem("cart", JSON.stringify(this.cart));
       localStorage.setItem("products", JSON.stringify(this.products));
     },

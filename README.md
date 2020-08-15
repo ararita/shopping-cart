@@ -6,11 +6,10 @@ We want to build a Product Listing page and a Shopping Cart page using Vue.js.
 
 Create a basic shopping cart application. We want to:
 
-<!-- * Display a list of products from the provided products.js -->
-<!-- * Add items to the cart
-* Remove items from the cart -->
-<!-- * Display the number of items in the cart -->
-
+- Display a list of products from the provided products.js
+- Add items to the cart
+- Remove items from the cart
+- Display the number of items in the cart
 - Display the total price of the items in the cart
 - Display the total price for each group of items in the cart based on quantity
 - Change our “Add To Cart” button caption to “Sold Out” and disable it when inventory is depleted.
