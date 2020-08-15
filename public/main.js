@@ -3,7 +3,7 @@ var app = new Vue({
   data: {
     products: products,
     cart: {
-      totalPrice: 0,
+      // totalPrice: 0,
       totalQuantity: 0,
       items: {},
     },
@@ -16,32 +16,49 @@ var app = new Vue({
       this.cart = JSON.parse(storedCart);
     }
   },
+  computed: {
+    calculateTotalPrice() {
+      let items = Object.values(this.cart.items);
+      let sum = 0;
+      for (let i = 0; i < items.length; i++) {
+        let item = items[i];
+        let price = item.price * item.quantity;
+        sum += price;
+      }
+      return sum;
+    },
+    calculateTotalPrice2() {
+      let items = Object.values(this.cart.items);
+      // reduce((curr, acc) =>)
+      let totalSum = items.reduce((accumulatorSum, item) => {
+        let price = item.price * item.quantity;
+        return price + accumulatorSum;
+      }, 0);
+      console.log(items);
+      console.log(totalSum);
+      return totalSum;
+    },
+  },
   methods: {
     addToCart(product) {
-      // if (product.stockCount <= 0) {
-      //   return;
-      // }
       if (product.id in this.cart.items) {
         let item = this.cart.items[product.id];
         if (item.stockCount > 0) {
           item.quantity++;
-          this.cart.totalQuantity++;
-          this.cart.items[product.id].stockCount--;
         }
       } else {
         Vue.set(app.cart.items, product.id, product);
         Vue.set(app.cart.items[product.id], "quantity", 1);
-        this.cart.totalQuantity++;
-        this.cart.items[product.id].stockCount--;
       }
-
-      // this.cart.items[product.id].stockCount--;
+      this.cart.totalQuantity++;
+      this.cart.items[product.id].stockCount--;
 
       localStorage.setItem("cart", JSON.stringify(this.cart));
     },
-    calculateTotalPrice(product) {},
+
     removeQuantity(product) {
       let item = this.cart.items[product.id];
+      console.log("item", item);
       if (item.quantity > 1) {
         item.quantity--;
         this.cart.totalQuantity--;
@@ -51,7 +68,6 @@ var app = new Vue({
         this.cart.totalQuantity--;
         item.stockCount++;
       }
-      // item.stockCount++;
       localStorage.setItem("cart", JSON.stringify(this.cart));
     },
   },

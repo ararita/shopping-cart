@@ -13,7 +13,7 @@
   <body>
     <body>
       <div id="app">
-        {{ cart }}
+        <pre>{{ JSON.stringify(cart, 0, 2) }}</pre>
         <nav>
           <ul>
             <li><a href="/" title="Products">Products</a></li>
@@ -38,6 +38,8 @@
             <button v-on:click="addToCart(product)">+</button>
             <button v-on:click="removeQuantity(product)">-</button>
           </section>
+          <p>Total price: {{calculateTotalPrice}}</p>
+          <p>Total price: {{calculateTotalPrice2}}</p>
 
           <!-- use public/products.js to populate the html -->
         </div>
