@@ -32,7 +32,7 @@ var app = new Vue({
         let itemsGroupPrice = item.price * item.quantity;
         sum += itemsGroupPrice;
       }
-      return sum;
+      return sum.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,");
 
       localStorage.setItem("cart", JSON.stringify(this.cart));
       localStorage.setItem("products", JSON.stringify(this.products));
@@ -87,7 +87,8 @@ var app = new Vue({
       localStorage.setItem("products", JSON.stringify(this.products));
     },
     calculateProductGroupPrice(product) {
-      return product.price * product.quantity;
+      let groupPrice = product.price * product.quantity;
+      return groupPrice.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,");
 
       localStorage.setItem("cart", JSON.stringify(this.cart));
       localStorage.setItem("products", JSON.stringify(this.products));
