@@ -3,7 +3,6 @@ var app = new Vue({
   data: {
     products: products,
     cart: {
-      // totalPrice: 0,
       totalQuantity: 0,
       items: {},
     },
@@ -67,8 +66,6 @@ var app = new Vue({
         this.cart.items[product.id].stockCount--;
         this.cart.totalQuantity++;
       }
-      // this.cart.totalQuantity++;
-      // this.cart.items[product.id].stockCount--;
 
       localStorage.setItem("cart", JSON.stringify(this.cart));
       localStorage.setItem("products", JSON.stringify(this.products));

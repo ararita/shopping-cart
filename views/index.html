@@ -3,28 +3,34 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>Products</title>
+
     <link
-    rel="stylesheet"
-    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-    crossorigin="anonymous"
-  />
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link href="style.css" rel="stylesheet" />
     <link
       href="https://fonts.googleapis.com/css?family=Titillium+Web:200,400,700"
       rel="stylesheet"
     />
-    <link href="style.css" rel="stylesheet" />
   </head>
   <body>
     <div id="app">
-      <!-- {{ cart }} -->
       <nav>
         <ul>
-          <li><a href="/" title="Products">Products</a></li>
+          <li>
+            <a href="/" style="text-decoration: none;" title="Products"
+              >Products</a
+            >
+          </li>
           <li>
             <a
               href="#myModal"
+              style="text-decoration: none;"
               title="Cart"
               data-toggle="modal"
               data-target="#myModal"
@@ -38,111 +44,107 @@
       </header>
       <div class="container">
         <section v-for="product in products" class="product">
-          <!-- <div class="product-card"> -->
-          
           <div>
             <figure class="image">
               <img :src="product.image" :alt="product.name" />
             </figure>
-          <div class="headline">
-            <h2>
-              {{ product.name }}
-            </h2>
-            <h2 style="color: #330099;">
-              {{ product.price + ' ' + product.currency}}
-            </h2>
+            <div class="headline">
+              <h2>
+                {{ product.name }}
+              </h2>
+              <h2 style="color: #330099;">
+                {{ product.price + product.currency}}
+              </h2>
+            </div>
+            <div class="description">
+              <p>{{ product.description }}</p>
+            </div>
           </div>
-          <div class="description">
-            <p>{{ product.description }}</p>
-           
-          </div>
-        </div>
           <button
-          class="add-product-btn"
-          v-if="product.stockCount > 0"
-          v-on:click="addToCart(product)"
-        >
-          Add to Cart
-        </button>
-        <p style="color: #ce1f1f;" v-else>
-          Out of Stock
-        </p>
+            style="outline: none;"
+            class="add-product-btn"
+            v-if="product.stockCount > 0"
+            v-on:click="addToCart(product)"
+          >
+            Add to Cart
+          </button>
+          <p style="color: #ce1f1f;" v-else>
+            Out of Stock
+          </p>
         </section>
-        <!-- use public/products.js to populate the html -->
       </div>
-       <!-- The Modal -->
-    <div class="modal fade" id="myModal">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <!-- Modal Header -->
-          <div class="modal-header">
-            <h4 class="modal-title text-center">My Cart</h4>
-            <button type="button" class="close" data-dismiss="modal">
-              &times;
-            </button>
-          </div>
 
-          <!-- Modal body -->
-          <div class="modal-body">
-            <table class="table table-hover mt-5 align-middle">
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>Product</th>
-                  <th>Price</th>
-                  <th>Quantity</th>
-                  <th>In Stock</th>
-                  <th>Total Price</th>
-                </tr>
-              </thead>
-              <tbody v-for="(product, productId) in cart.items" class="cart">
-                <tr>
-                  <td><img :src="product.image" :alt="product.name" /></td>
-                  <td>            
-                    {{ product.name }}</td>
-                  <td>{{ product.currency }}{{ product.price }}</td>
+      <!-- The Modal -->
+      <div class="modal fade" id="myModal">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title text-center">My Cart</h4>
+              <button type="button" class="close" data-dismiss="modal">
+                &times;
+              </button>
+            </div>
 
-                  <td class="cart-button">
-                    <button
-                      type="button"
-                      class="btn btn-outline-none text-dark"
-                      v-on:click="removeQuantity(product)"
-                    >
-                      -
-                    </button>
-                    {{cart.items[product.id] ? cart.items[product.id].quantity :
-                    0}}
-                    <button
-                      type="button"
-                      class="btn btn-outline-none text-dark"
-                      v-on:click="addToCart(product)"
-                    >
-                      +
-                    </button>
-                  </td>
-                  <td>{{ product.stockCount }} </td>
-              
-                  <td>
-                    {{ product.currency }}{{ calculateProductGroupPrice(product)
-                    }}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <!-- Modal body -->
+            <div class="modal-body">
+              <table class="table table-hover mt-5 align-middle">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>In Stock</th>
+                    <th>Total Price</th>
+                  </tr>
+                </thead>
+                <tbody v-for="(product, productId) in cart.items" class="cart">
+                  <tr>
+                    <td><img :src="product.image" :alt="product.name" /></td>
+                    <td>
+                      {{ product.name }}
+                    </td>
+                    <td>{{ product.currency }}{{ product.price }}</td>
 
-            <p>Total sum: €{{ calculateTotalPrice }}</p>
-          </div>
+                    <td class="cart-btn">
+                      <button
+                        style="outline: none; border: none; border-radius: 3px;"
+                        v-on:click="removeQuantity(product)"
+                      >
+                        -
+                      </button>
+                      {{cart.items[product.id] ? cart.items[product.id].quantity
+                      : 0}}
+                      <button
+                        style="outline: none; border: none; border-radius: 3px;"
+                        v-on:click="addToCart(product)"
+                      >
+                        +
+                      </button>
+                    </td>
+                    <td>{{ product.stockCount }}</td>
 
-          <!-- Modal footer -->
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">
-              Close
-            </button>
+                    <td>
+                      {{ product.currency }}{{
+                      calculateProductGroupPrice(product) }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <p>Total sum: €{{ calculateTotalPrice }}</p>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">
+                Close
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/vuex"></script>
