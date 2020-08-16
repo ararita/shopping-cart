@@ -52,16 +52,20 @@ nav ul li a:hover {
   font-weight: 500;
 }
 
-header {
+header h1 {
   text-align: center;
+  color: #777380;
+  font-weight: 300;
+  font-size: 35px;
+  padding-top: 80px;
 }
 
-h1 {
+/* h1 {
   color: #777380;
   font-weight: 200;
   font-size: 35px;
   padding-top: 50px;
-}
+} */
 
 h2 {
   font-size: 25px;
@@ -78,6 +82,10 @@ figure {
   box-shadow: 0px 5px 10px rgba(138, 136, 136, 0.74);
   border-radius: 5px;
   padding: 15px;
+}
+
+.product:hover {
+  border: 0.5px solid #6233c0;
 }
 
 .container {
@@ -131,3 +139,17 @@ figure {
   background: #373d3da8;
   cursor: pointer;
 }
+
+/* Cart */
+/* 
+.cart-container {
+  margin: 30px;
+} */
+
+/* .cart-nav ul li a {
+  text-decoration: none;
+}
+
+.cart {
+  border: none;
+} */

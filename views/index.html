@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Products</title>
     <link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous"
+  />
+    <link
       href="https://fonts.googleapis.com/css?family=Titillium+Web:200,400,700"
       rel="stylesheet"
     />
@@ -15,9 +21,15 @@
       <!-- {{ cart }} -->
       <nav>
         <ul>
-          <li><a href="/" title="Products">Products</a></li>
+          <li><a href="/" title="Products" class="text-decoration-none">Products</a></li>
           <li>
-            <a href="/cart" title="Cart">Cart ({{ cart.totalQuantity }})</a>
+            <a
+              href="#myModal"
+              title="Cart"
+              data-toggle="modal"
+              data-target="#myModal"
+              >Cart ({{ cart.totalQuantity }})</a
+            >
           </li>
         </ul>
       </nav>
@@ -67,10 +79,92 @@
         </section>
         <!-- use public/products.js to populate the html -->
       </div>
+       <!-- The Modal -->
+    <div class="modal fade" id="myModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">My Cart</h4>
+            <button type="button" class="close" data-dismiss="modal">
+              &times;
+            </button>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body">
+            <table class="table table-hover mt-5 text-center">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Price</th>
+                  <th>Quantity</th>
+                  <th>Total Price</th>
+                </tr>
+              </thead>
+              <tbody v-for="(product, productId) in cart.items" class="cart">
+                <tr>
+                  <td>{{ product.name }}</td>
+                  <td>{{ product.currency }}{{ product.price }}</td>
+
+                  <td>
+                    <button
+                      type="button"
+                      class="btn btn-outline-none text-dark"
+                      v-on:click="removeQuantity(product)"
+                    >
+                      -
+                    </button>
+                    {{cart.items[product.id] ? cart.items[product.id].quantity :
+                    0}}
+                    <button
+                      type="button"
+                      class="btn btn-outline-none text-dark"
+                      v-on:click="addToCart(product)"
+                    >
+                      +
+                    </button>
+                  </td>
+                  <td>
+                    {{ product.currency }}{{ calculateProductGroupPrice(product)
+                    }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <p>Total price: {{ calculateTotalPrice }}</p>
+          </div>
+
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/vuex"></script>
     <script src="products.js"></script>
     <script src="main.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>
