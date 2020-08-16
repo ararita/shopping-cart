@@ -21,7 +21,7 @@
       <!-- {{ cart }} -->
       <nav>
         <ul>
-          <li><a href="/" title="Products" class="text-decoration-none">Products</a></li>
+          <li><a href="/" title="Products">Products</a></li>
           <li>
             <a
               href="#myModal"
@@ -39,9 +39,11 @@
       <div class="container">
         <section v-for="product in products" class="product">
           <!-- <div class="product-card"> -->
-          <figure class="image">
-            <img :src="product.image" :alt="product.name" />
-          </figure>
+          
+          <div>
+            <figure class="image">
+              <img :src="product.image" :alt="product.name" />
+            </figure>
           <div class="headline">
             <h2>
               {{ product.name }}
@@ -52,31 +54,19 @@
           </div>
           <div class="description">
             <p>{{ product.description }}</p>
-            <button
-            class="add-product-btn"
-            v-if="product.stockCount > 0"
-            v-on:click="addToCart(product)"
-          >
-            Add to Cart
-          </button>
-          <p style="color: #ce1f1f;" v-else>
-            Out of Stock
-          </p>
+           
           </div>
-
-          <!-- <aside> -->
-          <!-- <ul>
-                  <li>Price: {{ product.price + ' ' + product.currency}}</li>
-                  <li>In Stock: {{ product.stockCount }} items</li>
-                </ul> -->
-
-          <!-- <p>
-              In Cart: {{cart.items[product.id] ?
-              cart.items[product.id].quantity : 0}}
-            </p> -->
-          <!-- </aside> -->
-          
-          <!-- </div> -->
+        </div>
+          <button
+          class="add-product-btn"
+          v-if="product.stockCount > 0"
+          v-on:click="addToCart(product)"
+        >
+          Add to Cart
+        </button>
+        <p style="color: #ce1f1f;" v-else>
+          Out of Stock
+        </p>
         </section>
         <!-- use public/products.js to populate the html -->
       </div>
@@ -112,7 +102,7 @@
                     {{ product.name }}</td>
                   <td>{{ product.currency }}{{ product.price }}</td>
 
-                  <td>
+                  <td class="cart-button">
                     <button
                       type="button"
                       class="btn btn-outline-none text-dark"
