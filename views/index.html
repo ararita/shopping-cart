@@ -52,25 +52,18 @@
               <h2>
                 {{ product.name }}
               </h2>
-              <h2 style="color: #330099;">
-                {{ product.price + product.currency}}
+              <h2 style="color: #6233c0;">
+                {{ product.currency + product.price }}
               </h2>
             </div>
-            <div class="description">
-              <p>{{ product.description }}</p>
-            </div>
+            <p>{{ product.description }}</p>
           </div>
-          <button
-            style="outline: none;"
-            class="add-product-btn"
-            v-if="product.stockCount > 0"
-            v-on:click="addToCart(product)"
-          >
+          <button v-if="product.stockCount > 0" v-on:click="addToCart(product)">
             Add to Cart
           </button>
-          <p style="color: #ce1f1f;" v-else>
+          <button v-else style="background-color: #7d7c80a1;">
             Out of Stock
-          </p>
+          </button>
         </section>
       </div>
 
@@ -85,7 +78,6 @@
                 &times;
               </button>
             </div>
-
             <!-- Modal body -->
             <div class="modal-body">
               <table class="table table-hover mt-5 align-middle">
@@ -94,8 +86,8 @@
                     <th></th>
                     <th>Product</th>
                     <th>Price</th>
-                    <th>Quantity</th>
                     <th>In Stock</th>
+                    <th>Quantity</th>
                     <th>Total Price</th>
                   </tr>
                 </thead>
@@ -106,7 +98,7 @@
                       {{ product.name }}
                     </td>
                     <td>{{ product.currency }}{{ product.price }}</td>
-
+                    <td>{{ product.stockCount }}</td>
                     <td class="cart-btn">
                       <button
                         style="outline: none; border: none; border-radius: 3px;"
@@ -123,8 +115,6 @@
                         +
                       </button>
                     </td>
-                    <td>{{ product.stockCount }}</td>
-
                     <td>
                       {{ product.currency }}{{
                       calculateProductGroupPrice(product) }}
@@ -135,7 +125,6 @@
 
               <p>Total sum: €{{ calculateTotalPrice }}</p>
             </div>
-
             <!-- Modal footer -->
             <div class="modal-footer">
               <button type="button" class="btn btn-danger" data-dismiss="modal">

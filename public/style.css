@@ -53,14 +53,13 @@ nav ul li a:hover {
 header h1 {
   text-align: center;
   color: #777380;
-  font-weight: 300;
   font-size: 35px;
   padding-top: 80px;
 }
 
 h2 {
   font-size: 25px;
-  font-weight: lighter;
+  font-weight: 400;
 }
 
 figure {
@@ -84,6 +83,22 @@ figure {
   border: 0.5px solid #7d7c80a1;
 }
 
+.product button {
+  width: 100%;
+  height: 43px;
+  border: none;
+  border-radius: 3px;
+  background: #373d3d;
+  font-size: 1.1em;
+  color: white;
+  outline: none;
+}
+
+.product button:hover {
+  background: #373d3da8;
+  cursor: pointer;
+}
+
 .container {
   display: grid;
   grid-gap: 32px;
@@ -98,22 +113,6 @@ figure {
   justify-content: space-between;
   padding-top: 10px;
   padding-bottom: 10px;
-}
-
-.add-product-btn {
-  width: 100%;
-  height: 43px;
-  border: none;
-  border-radius: 3px;
-  background: #373d3d;
-  font-size: 1.1em;
-  color: white;
-  outline: none;
-}
-
-.add-product-btn:hover {
-  background: #373d3da8;
-  cursor: pointer;
 }
 
 /* Cart */
@@ -138,8 +137,3 @@ figure {
 table button {
   cursor: pointer;
 }
-/* @media (max-width: 600px) {
-  .container {
-    grid-template-columns: 1fr;
-  }
-} */
