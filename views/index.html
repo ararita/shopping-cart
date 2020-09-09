@@ -23,18 +23,18 @@
       <nav>
         <ul>
           <li>
-            <a href="/" style="text-decoration: none;" title="Products"
+            <a href="/" style="text-decoration: none" title="Products"
               >Products</a
             >
           </li>
           <li>
             <a
               href="#myModal"
-              style="text-decoration: none;"
+              style="text-decoration: none"
               title="Cart"
               data-toggle="modal"
               data-target="#myModal"
-              >Cart ({{ cart.totalQuantity }})</a
+              >Cart ({{ cartTotalQuantity }})</a
             >
           </li>
         </ul>
@@ -49,10 +49,8 @@
               <img :src="product.image" :alt="product.name" />
             </figure>
             <div class="headline">
-              <h2>
-                {{ product.name }}
-              </h2>
-              <h2 style="color: #6233c0;">
+              <h2>{{ product.name }}</h2>
+              <h2 style="color: #6233c0">
                 {{ product.currency + product.price }}
               </h2>
             </div>
@@ -61,7 +59,7 @@
           <button v-if="product.stockCount > 0" v-on:click="addToCart(product)">
             Add to Cart
           </button>
-          <button v-else style="background-color: #7d7c80a1;">
+          <button v-else style="background-color: #7d7c80a1">
             Out of Stock
           </button>
         </section>
@@ -94,14 +92,12 @@
                 <tbody v-for="(product, productId) in cart.items" class="cart">
                   <tr>
                     <td><img :src="product.image" :alt="product.name" /></td>
-                    <td>
-                      {{ product.name }}
-                    </td>
+                    <td>{{ product.name }}</td>
                     <td>{{ product.currency }}{{ product.price }}</td>
                     <td>{{ product.stockCount }}</td>
                     <td class="cart-btn">
                       <button
-                        style="outline: none; border: none; border-radius: 3px;"
+                        style="outline: none; border: none; border-radius: 3px"
                         v-on:click="removeQuantity(product)"
                       >
                         -
@@ -109,7 +105,7 @@
                       {{cart.items[product.id] ? cart.items[product.id].quantity
                       : 0}}
                       <button
-                        style="outline: none; border: none; border-radius: 3px;"
+                        style="outline: none; border: none; border-radius: 3px"
                         v-on:click="addToCart(product)"
                       >
                         +

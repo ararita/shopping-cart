@@ -3,7 +3,6 @@ var app = new Vue({
   data: {
     products: products,
     cart: {
-      totalQuantity: 0,
       items: {},
     },
   },
@@ -33,22 +32,14 @@ var app = new Vue({
         sum += itemsGroupPrice;
       }
       return sum.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,");
-
-      localStorage.setItem("cart", JSON.stringify(this.cart));
-      localStorage.setItem("products", JSON.stringify(this.products));
     },
 
-    // calculateTotalPrice2() {
-    //   let items = Object.values(this.cart.items);
-    //   // reduce((curr, acc) =>)
-    //   let totalSum = items.reduce((accumulatorSum, item) => {
-    //     let price = item.price * item.quantity;
-    //     return price + accumulatorSum;
-    //   }, 0);
-    //   console.log(items);
-    //   console.log(totalSum);
-    //   return totalSum;
-    // },
+    cartTotalQuantity() {
+      const cartItems = Object.values(this.cart.items);
+      return cartItems.reduce((cartTotalQuantity, currentItem) => {
+        return cartTotalQuantity + currentItem.quantity;
+      }, 0);
+    },
   },
   methods: {
     addToCart(product) {
@@ -58,13 +49,11 @@ var app = new Vue({
           item.quantity++;
           // this.products[product.id].stockCount--;
           item.stockCount--;
-          this.cart.totalQuantity++;
         }
       } else {
         Vue.set(app.cart.items, product.id, product);
         Vue.set(app.cart.items[product.id], "quantity", 1);
         this.cart.items[product.id].stockCount--;
-        this.cart.totalQuantity++;
       }
 
       localStorage.setItem("cart", JSON.stringify(this.cart));
@@ -76,11 +65,9 @@ var app = new Vue({
       console.log("item", item);
       if (item.quantity > 1) {
         item.quantity--;
-        this.cart.totalQuantity--;
         item.stockCount++;
       } else {
         Vue.delete(this.cart.items, product.id);
-        this.cart.totalQuantity--;
         item.stockCount++;
       }
       localStorage.setItem("cart", JSON.stringify(this.cart));
@@ -89,9 +76,6 @@ var app = new Vue({
     calculateProductGroupPrice(product) {
       let groupPrice = product.price * product.quantity;
       return groupPrice.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,");
-
-      localStorage.setItem("cart", JSON.stringify(this.cart));
-      localStorage.setItem("products", JSON.stringify(this.products));
     },
   },
 });
